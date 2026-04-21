@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    name: Lint, typecheck & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Reject foreign lockfiles
+        run: |
+          for f in package-lock.json pnpm-lock.yaml yarn.lock; do
+            if [ -f "$f" ]; then
+              echo "::error::Found $f — matchigo uses Bun (bun.lock) exclusively. See CONTRIBUTING.md."
+              exit 1
+            fi
+          done
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Prettier check
+        run: bun run format:check
+
+      - name: Type-check
+        run: bun run typecheck
+
+      - name: Tests
+        run: bun run test
+
+      - name: Build
+        run: bun run build
+
+      - name: TypeDoc dry-run (catches broken refs)
+        run: bun run docs:check

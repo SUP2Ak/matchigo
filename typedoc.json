@@ -1,0 +1,29 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "api-docs",
+  "name": "matchigo",
+  "includeVersion": true,
+  "readme": "none",
+  "hideGenerator": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "excludeProtected": false,
+  "sort": ["source-order"],
+  "categorizeByGroup": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/SUP2Ak/matchigo",
+    "npm": "https://www.npmjs.com/package/matchigo",
+    "README": "https://github.com/SUP2Ak/matchigo#readme"
+  },
+  "sidebarLinks": {
+    "FAQ": "https://github.com/SUP2Ak/matchigo/blob/main/FAQ.md",
+    "Benchmarks": "https://github.com/SUP2Ak/matchigo/blob/main/bench/bench-report.bun.md"
+  },
+  "treatWarningsAsErrors": false,
+  "validation": {
+    "notExported": false,
+    "invalidLink": true,
+    "notDocumented": false
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "name": "matchigo",
+  "version": "1.0.0",
+  "description": "Fast, data-driven pattern matching for TypeScript — Rust-like, lazy-compiled, type-safe exhaustiveness.",
+  "keywords": [
+    "pattern-matching",
+    "match",
+    "rust",
+    "typescript",
+    "exhaustive",
+    "fast"
+  ],
+  "license": "MIT",
+  "author": "SUP2Ak",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "README.fr.md",
+    "FAQ.md",
+    "FAQ.fr.md",
+    "CONTRIBUTING.md",
+    "CONTRIBUTING.fr.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "bun test tests/",
+    "bench": "bun run bench/bench.ts",
+    "bench:node": "node --experimental-strip-types bench/bench.ts",
+    "bench:deno": "deno run -A bench/bench.ts",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.ts\" \"bench/**/*.ts\" \"tests/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"bench/**/*.ts\" \"tests/**/*.ts\"",
+    "docs": "typedoc",
+    "docs:check": "typedoc --emit none",
+    "docs:serve": "npx serve api-docs -l 5173"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.4"
+  },
+  "peerDependenciesMeta": {
+    "typescript": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "match-iz": "latest",
+    "mitata": "latest",
+    "prettier": "^3.3.0",
+    "ts-pattern": "latest",
+    "typedoc": "latest",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "bun@1.2.13"
+}

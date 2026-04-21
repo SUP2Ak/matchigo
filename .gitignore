@@ -1,0 +1,7 @@
+node_modules
+dist
+api-docs
+bench-report.md
+bench-results.json
+*.tsbuildinfo
+.DS_Store
