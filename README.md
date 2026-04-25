@@ -399,11 +399,11 @@ matchigo emits a `console.warn` **once** when it detects misuse that defeats cac
 - Reconstructing `rules` on every `match(value, rules)` call (the "cold-path inline" anti-pattern).
 - Creating thousands of distinct `matcher()` instances (usually means the builder is inside a hot loop).
 
-Warnings are controlled by `NODE_ENV` (`production`/`prod` disables them). The check happens once at module load, so **production has zero cost** — no env reads, no counters, no string formatting.
+Warnings are **on by default** and fire at most once per process. Call `silenceWarnings()` in your production entry point to opt out. No env reads, no counters, no string formatting after that.
 
 ```ts
 import { silenceWarnings } from "matchigo";
-silenceWarnings(); // disable programmatically
+silenceWarnings(); // call once at startup to disable all warnings
 ```
 
 ## Benchmarks

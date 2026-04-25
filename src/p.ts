@@ -230,8 +230,8 @@ export const P = {
   // Composers
   array: <Item>(item: Item): PArray<Item> => ({ [PATTERN]: "array", item }),
   /**
-   * Literal union — matches if the value is strictly equal (`Object.is`) to
-   * any of the given values. Apply it on a discriminant field to narrow a
+   * Literal union — matches if the value is strictly equal (SameValue equality)
+   * to any of the given values. Apply it on a discriminant field to narrow a
    * tagged union: `{ kind: P.union("a", "b") }`.
    *
    * @example
