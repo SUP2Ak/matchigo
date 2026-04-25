@@ -1,9 +1,8 @@
 // Dev-only cold-path instrumentation.
 // Resolution policy (evaluated ONCE at module load → zero runtime cost):
 //
-//   1. MATCHIGO_DEV env var wins — accepts "0"|"false" (off) or "1"|"true" (on).
-//   2. Else NODE_ENV — matches "production", "prod" (case-insensitive) → off.
-//   3. Else default → on (verbose dev).
+//   1. NODE_ENV — matches "production", "prod" (case-insensitive) → off.
+//   2. Else default → on (verbose dev).
 //
 // Programmatic override: silenceWarnings() at startup mutes everything.
 // No NODE_ENV at all? Dev mode is ON. The counters still cost only a few `++`
@@ -12,9 +11,6 @@
 const DEV: boolean = (() => {
   try {
     if (typeof process === "undefined" || !process?.env) return true;
-    const explicit = process.env.MATCHIGO_DEV;
-    if (explicit === "0" || explicit === "false") return false;
-    if (explicit === "1" || explicit === "true") return true;
     const node = (process.env.NODE_ENV ?? "").toLowerCase();
     if (node === "production" || node === "prod") return false;
     return true;
@@ -48,7 +44,7 @@ export function trackMatch(cacheHit: boolean): void {
         `    • Or compile once with compile():\n` +
         `        const dispatch = compile([...]);\n` +
         `        dispatch(value);\n` +
-        `  Silence: silenceWarnings() — or set MATCHIGO_DEV=0.`,
+        `  Silence: silenceWarnings() — or set NODE_ENV=production.`,
     );
     warnedMatch = true;
   }
@@ -65,7 +61,7 @@ export function trackMatcher(): void {
         `        .with(...)\n` +
         `        .otherwise(...);   // builds + compiles once\n` +
         `      classify(value);      // reused hot path\n` +
-        `  Silence: silenceWarnings() — or set MATCHIGO_DEV=0.`,
+        `  Silence: silenceWarnings() — or set NODE_ENV=production.`,
     );
     warnedMatcher = true;
   }
