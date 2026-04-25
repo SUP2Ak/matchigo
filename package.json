@@ -1,6 +1,6 @@
 {
   "name": "matchigo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fast, data-driven pattern matching for TypeScript — Rust-like, lazy-compiled, type-safe exhaustiveness.",
   "keywords": [
     "pattern-matching",
@@ -58,7 +58,9 @@
     "typescript": ">=5.4"
   },
   "peerDependenciesMeta": {
-    "typescript": { "optional": true }
+    "typescript": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/bun": "latest",
