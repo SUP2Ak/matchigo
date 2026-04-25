@@ -36,13 +36,8 @@
   },
   "files": [
     "dist",
-    "src",
     "README.md",
     "README.fr.md",
-    "FAQ.md",
-    "FAQ.fr.md",
-    "CONTRIBUTING.md",
-    "CONTRIBUTING.fr.md",
     "LICENSE"
   ],
   "sideEffects": false,
