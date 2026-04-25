@@ -1,23 +1,9 @@
 // Dev-only cold-path instrumentation.
-// Resolution policy (evaluated ONCE at module load → zero runtime cost):
-//
-//   1. NODE_ENV — matches "production", "prod" (case-insensitive) → off.
-//   2. Else default → on (verbose dev).
-//
-// Programmatic override: silenceWarnings() at startup mutes everything.
-// No NODE_ENV at all? Dev mode is ON. The counters still cost only a few `++`
-// ops per call; the console.warn only ever fires ONCE per counter per process.
+// Warnings are ON by default and fire at most once per counter per process.
+// Call silenceWarnings() at startup to opt out (e.g. in production entry points).
+// The counters cost only a few `++` ops per call; no env reads, no allocations.
 
-const DEV: boolean = (() => {
-  try {
-    if (typeof process === "undefined" || !process?.env) return true;
-    const node = (process.env.NODE_ENV ?? "").toLowerCase();
-    if (node === "production" || node === "prod") return false;
-    return true;
-  } catch {
-    return true;
-  }
-})();
+const DEV = true;
 
 let matchCalls = 0;
 let matchMisses = 0;
@@ -44,7 +30,7 @@ export function trackMatch(cacheHit: boolean): void {
         `    • Or compile once with compile():\n` +
         `        const dispatch = compile([...]);\n` +
         `        dispatch(value);\n` +
-        `  Silence: silenceWarnings() — or set NODE_ENV=production.`,
+        `  Silence: call silenceWarnings() in your production entry point.`,
     );
     warnedMatch = true;
   }
@@ -61,7 +47,7 @@ export function trackMatcher(): void {
         `        .with(...)\n` +
         `        .otherwise(...);   // builds + compiles once\n` +
         `      classify(value);      // reused hot path\n` +
-        `  Silence: silenceWarnings() — or set NODE_ENV=production.`,
+        `  Silence: call silenceWarnings() in your production entry point.`,
     );
     warnedMatcher = true;
   }
