@@ -345,7 +345,7 @@ matchigo émet un `console.warn` **une seule fois** quand il détecte un mésusa
 - Reconstruire `rules` à chaque appel de `match(value, rules)` (l'anti-pattern « cold-path inline »).
 - Créer des milliers d'instances distinctes de `matcher()` (typiquement, le builder est dans une boucle chaude).
 
-Les avertissements sont pilotés par `NODE_ENV` (`production`/`prod` les désactive) ou par l'override explicite `MATCHIGO_DEV=0` / `MATCHIGO_DEV=1`. La vérification se fait une fois au chargement du module, donc **production a un coût nul** — pas de lecture d'env, pas de compteur, pas de formatage de string.
+Les avertissements sont pilotés par `NODE_ENV` (`production`/`prod` les désactive). La vérification se fait une fois au chargement du module, donc **production a un coût nul** — pas de lecture d'env, pas de compteur, pas de formatage de string.
 
 ```ts
 import { silenceWarnings } from "matchigo";

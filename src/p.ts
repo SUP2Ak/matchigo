@@ -236,7 +236,7 @@ export const P = {
    *
    * @example
    * ```ts
-   * { with: P.union("GET", "POST", "PUT"), then: () => "http-verb" }
+   * { with: P.union("GET", "POST", "PUT"), then: () => "method" }
    * ```
    */
   union: <const Values extends readonly unknown[]>(...values: Values): PUnion<Values> => ({

@@ -5,10 +5,22 @@
   "keywords": [
     "pattern-matching",
     "match",
-    "rust",
+    "dispatch",
+    "compile",
+    "rule-engine",
+    "rules",
     "typescript",
+    "type-safe",
     "exhaustive",
-    "fast"
+    "narrowing",
+    "discriminated-union",
+    "switch",
+    "data-driven",
+    "fast",
+    "zero-dependency",
+    "rust-like",
+    "bun",
+    "node"
   ],
   "license": "MIT",
   "author": "SUP2Ak",
@@ -24,13 +36,8 @@
   },
   "files": [
     "dist",
-    "src",
     "README.md",
     "README.fr.md",
-    "FAQ.md",
-    "FAQ.fr.md",
-    "CONTRIBUTING.md",
-    "CONTRIBUTING.fr.md",
     "LICENSE"
   ],
   "sideEffects": false,
